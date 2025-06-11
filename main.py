@@ -19,7 +19,7 @@ def main():
 
 
 def display_menu():
-    print("=== User CRUD Repository Menu ===")
+    print("=== CRUD Repository Menu ===")
     count = 0
     for op in LIST_OR_OPERATIONS:
         count += 1
@@ -34,7 +34,7 @@ def return_to_menu(message = ""):
 
 
 if __name__ == "__main__":
-    print("The program User CRUD Repository is launching...")
+    print("The program CRUD Repository is launching...")
     time.sleep(2)
     input("Press 'ENTER' to start")
     main()
