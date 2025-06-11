@@ -26,7 +26,7 @@ def display_menu():
         print(f"{count if count < len(LIST_OR_OPERATIONS) else 0}. {op}")
 
 def ask_input(prompt):
-    return input(prompt);
+    return input(prompt)
 
 def return_to_menu(message = ""):
     print(message)
