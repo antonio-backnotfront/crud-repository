@@ -5,3 +5,16 @@ class User:
         self.name = data['name']
         self.phone = data['phone']
         self.age = data['age']
+        self.id = data.get('id')
+
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'name': self.name,
+            'phone': self.phone,
+            'age': self.age,
+        }
