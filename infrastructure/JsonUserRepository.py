@@ -38,6 +38,13 @@ class JsonUserRepository(AbstractUserRepository, ABC):
                 return User(user)
         return None
 
+    def get_user_by_username(self, user_username):
+        data = self._load()
+        for user in data:
+            if user["username"] == user_username:
+                return User(user)
+        return None
+
     def get_all_users(self):
         data = self._load()
         return [User(user_data) for user_data in data]
@@ -54,7 +61,7 @@ class JsonUserRepository(AbstractUserRepository, ABC):
 
     def delete_user(self, user_id):
         data = self._load()
-        new_data = [user for user in data if user["id"] != user_id]
+        new_data = [user for user in data if int(user["id"]) != int(user_id)]
         if len(new_data) == len(data):
             return False
         self._save(new_data)
