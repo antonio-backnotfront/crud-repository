@@ -1,11 +1,13 @@
 import time
 
+LIST_OR_OPERATIONS = ["Create User", "View User", "Update User", "Delete User", "Show All Users", "Exit"]
+
 def main():
     display_menu()
-    operationNumber = ask_input("Enter the operation number (e.g 1): ")
+    operationNumber = ask_input("Enter the operation number: ")
     try:
         operation  = int(operationNumber)
-        if operation > 0 and operation < 6:
+        if 0 < operation < 6:
             print("Executing")
         else:
             return_to_menu("Invalid operation number")
@@ -16,19 +18,12 @@ def main():
 
 
 
-
-
-
-
-
 def display_menu():
     print("=== User CRUD Repository Menu ===")
-    print("1. Create User")
-    print("2. View User")
-    print("3. Update User")
-    print("4. Delete User")
-    print("5. Show All Users")
-    print("6. Exit")
+    count = 0
+    for op in LIST_OR_OPERATIONS:
+        count += 1
+        print(f"{count if count < len(LIST_OR_OPERATIONS) else 0}. {op}")
 
 def ask_input(prompt):
     return input(prompt);
