@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 
-def AbstractUserRepository():
+class AbstractUserRepository:
 
     @abstractmethod
     def create_user(self, user):
