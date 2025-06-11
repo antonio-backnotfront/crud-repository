@@ -22,13 +22,19 @@ class JsonUserRepository(AbstractUserRepository, ABC):
 
     def create_user(self, user: User):
         data = self._load()
+        if data:
+            next_id = max(u["id"] for u in data) + 1
+        else:
+            next_id = 1
+        user.id = next_id
         data.append(user.to_dict())
+
         self._save(data)
 
-    def get_user(self, id):
+    def get_user(self, user_id):
         data = self._load()
         for user in data:
-            if user["id"] == id:
+            if int(user["id"]) == int(user_id):
                 return User(user)
         return None
 
@@ -36,20 +42,20 @@ class JsonUserRepository(AbstractUserRepository, ABC):
         data = self._load()
         return [User(user_data) for user_data in data]
     #
-    def update_user(self, userId, new_data):
+    def update_user(self, user_id, new_data):
         data = self._load()
         for user in data:
-            if user["id"] == userId:
+            if int(user["id"]) == int(user_id):
                 for k, v in new_data.items():
                     user[k] = v
                 self._save(data)
                 return True
         return False
 
-    def delete_user(self, userId):
+    def delete_user(self, user_id):
         data = self._load()
-        new_data = [user for user in data if user["id"] != userId]
-        if (len(new_data) == len(data)):
+        new_data = [user for user in data if user["id"] != user_id]
+        if len(new_data) == len(data):
             return False
         self._save(new_data)
         return True
