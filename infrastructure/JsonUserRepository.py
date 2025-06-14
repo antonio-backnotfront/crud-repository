@@ -8,6 +8,11 @@ from interfaces.AbstractUserRepository import AbstractUserRepository
 class JsonUserRepository(AbstractUserRepository, ABC):
     def __init__(self, filepath):
         self.filepath = filepath
+        try:
+            with open(filepath, "x") as json_file:
+                json.dump([], json_file)
+        except FileExistsError:
+            pass
 
     def _load(self):
         with open(self.filepath, "r") as json_file:
